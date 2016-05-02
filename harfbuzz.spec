@@ -2,7 +2,7 @@
 
 Name:           harfbuzz
 Version:        1.2.4
-Release:        4.ndp1
+Release:        5.ndp1
 Summary:        Text shaping library
 
 License:        MIT
@@ -71,8 +71,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %files
-%license COPYING
-%doc NEWS AUTHORS README
+%doc COPYING NEWS AUTHORS README
 %{_libdir}/libharfbuzz.so.*
 
 %files devel
@@ -90,6 +89,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Mon May 02 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-5.ndp1
+- Use %doc macro for license
+
 * Mon May 02 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-4.ndp1
 - Add patch for el6 glib ver
 
