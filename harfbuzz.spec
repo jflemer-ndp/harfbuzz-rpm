@@ -1,6 +1,8 @@
+%bcond_with graphite2
+
 Name:           harfbuzz
 Version:        1.2.4
-Release:        2.ndp1
+Release:        3.ndp1
 Summary:        Text shaping library
 
 License:        MIT
@@ -11,7 +13,9 @@ BuildRequires:  cairo-devel
 BuildRequires:  freetype-devel
 BuildRequires:  glib2-devel
 BuildRequires:  libicu-devel
+%if %{with graphite2}
 BuildRequires:  graphite2-devel
+%endif
 BuildRequires:  gtk-doc
 
 %description
@@ -39,7 +43,7 @@ This package contains Harfbuzz ICU support library.
 
 
 %build
-%configure --disable-static --with-graphite2
+%configure --disable-static ${?_with_graphite2}
 
 # Remove lib64 rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
@@ -80,6 +84,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Sun May 01 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-3.ndp1
+- Make graphite2 optional
+
 * Sun May 01 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-2.ndp1
 - Change dist
 
