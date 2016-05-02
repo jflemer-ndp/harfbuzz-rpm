@@ -1,8 +1,9 @@
+%bcond_with freetype2
 %bcond_with graphite2
 
 Name:           harfbuzz
 Version:        1.2.4
-Release:        5.ndp1
+Release:        6.ndp1
 Summary:        Text shaping library
 
 License:        MIT
@@ -11,7 +12,9 @@ Source0:        http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-%{
 Patch0:         harfbuzz_glib2_el6.patch
 
 BuildRequires:  cairo-devel
-BuildRequires:  freetype-devel
+%if %{with freetype2}
+BuildRequires:  freetype2-devel
+%endif
 BuildRequires:  glib2-devel
 BuildRequires:  libicu-devel
 %if %{with graphite2}
@@ -46,6 +49,11 @@ This package contains Harfbuzz ICU support library.
 
 %build
 %configure \
+%if %{with freetype2}
+	--with-freetype2 \
+%else
+	--without-freetype2 \
+%endif
 %if %{with graphite2}
 	--with-graphite2 \
 %endif
@@ -76,7 +84,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %files devel
 %doc %{_datadir}/gtk-doc
+%if %{with freetype2}
 %{_bindir}/hb-view
+%endif
 %{_bindir}/hb-ot-shape-closure
 %{_bindir}/hb-shape
 %{_includedir}/harfbuzz/
@@ -89,6 +99,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Mon May 02 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-6.ndp1
+- Make freetype2 conditional
+
 * Mon May 02 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-5.ndp1
 - Use %doc macro for license
 
