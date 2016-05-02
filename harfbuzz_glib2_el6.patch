@@ -1,0 +1,28 @@
+--- harfbuzz-1.2.4/src/hb-glib.h.orig	2016-05-02 07:36:44.198238672 -0600
++++ harfbuzz-1.2.4/src/hb-glib.h	2016-05-02 07:47:37.879742185 -0600
+@@ -46,8 +46,10 @@
+ HB_EXTERN hb_unicode_funcs_t *
+ hb_glib_get_unicode_funcs (void);
+ 
++#if GLIB_CHECK_VERSION(2,30,0)
+ HB_EXTERN hb_blob_t *
+ hb_glib_blob_create (GBytes *gbytes);
++#endif
+ 
+ 
+ HB_END_DECLS
+--- harfbuzz-1.2.4/src/hb-glib.cc.orig	2016-05-02 07:40:05.958853660 -0600
++++ harfbuzz-1.2.4/src/hb-glib.cc	2016-05-02 07:47:41.463074198 -0600
+@@ -382,6 +382,7 @@
+   return const_cast<hb_unicode_funcs_t *> (&_hb_glib_unicode_funcs);
+ }
+ 
++#if GLIB_CHECK_VERSION(2,30,0)
+ /**
+  * hb_glib_blob_create:
+  *
+@@ -398,3 +399,4 @@
+ 			 g_bytes_ref (gbytes),
+ 			 (hb_destroy_func_t) g_bytes_unref);
+ }
++#endif

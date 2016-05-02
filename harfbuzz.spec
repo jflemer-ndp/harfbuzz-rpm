@@ -2,12 +2,13 @@
 
 Name:           harfbuzz
 Version:        1.2.4
-Release:        3.ndp1
+Release:        4.ndp1
 Summary:        Text shaping library
 
 License:        MIT
 URL:            http://freedesktop.org/wiki/Software/HarfBuzz
 Source0:        http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-%{version}.tar.bz2
+Patch0:         harfbuzz_glib2_el6.patch
 
 BuildRequires:  cairo-devel
 BuildRequires:  freetype-devel
@@ -40,6 +41,7 @@ This package contains Harfbuzz ICU support library.
 
 %prep
 %setup -q
+%patch0 -p1
 
 
 %build
@@ -88,6 +90,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Mon May 02 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-4.ndp1
+- Add patch for el6 glib ver
+
 * Sun May 01 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-3.ndp1
 - Make graphite2 optional
 
