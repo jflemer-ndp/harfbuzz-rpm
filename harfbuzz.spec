@@ -1,6 +1,6 @@
 Name:           harfbuzz
 Version:        1.2.4
-Release:        1%{?dist}
+Release:        2.ndp1
 Summary:        Text shaping library
 
 License:        MIT
@@ -80,6 +80,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Sun May 01 2016 James E. Flemer <james.flemer@ndpgroup.com> - 1.2.4-2.ndp1
+- Change dist
+
 * Sat Mar 19 2016 Parag Nemade <pnemade AT redhat DOT com> - 1.2.4-1
 - Update to 1.2.4
 
