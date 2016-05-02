@@ -43,7 +43,11 @@ This package contains Harfbuzz ICU support library.
 
 
 %build
-%configure --disable-static ${?_with_graphite2}
+%configure \
+%if %{with graphite2}
+	--with-graphite2 \
+%endif
+	--disable-static
 
 # Remove lib64 rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
